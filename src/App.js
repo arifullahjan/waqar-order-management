@@ -1,40 +1,21 @@
-import React from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import HomePage from "./components/HomePage";
-import MenuPage from "./components/MenuPage";
+import Menu from "./components/Menu";
 import ItemDetailPage from "./components/ItemDetailPage";
-import Navbar from "./components/Navbar";
-import { Button } from "@mui/material";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import MealCard from "./components/MealCard";
+import items from "./components/data";
 function App() {
-  const navigate = useNavigate();
+  const [menuItems, setMenuItems] = useState(items);
   return (
     <>
-      <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/MenuPage" element={<MenuPage />} />
+        <Route path="/Menu" element={<Menu />} />
         <Route path="/ItemDetailPage" element={<ItemDetailPage />} />
+        <Route path="/MealCard" element={<MealCard />} />
       </Routes>
-      <Button
-        sx={{ width: 200, padding: 1, margin: 2 }}
-        size="small"
-        variant="contained"
-        color="secondary"
-        onClick={() => navigate("/MenuPage")}
-      >
-        MenuPage <ChevronRightIcon />
-      </Button>
-      &nbsp; &nbsp; &nbsp;
-      <Button
-        sx={{ width: 200, padding: 1, margin: 2 }}
-        size="small"
-        variant="contained"
-        color="success"
-        onClick={() => navigate("/ItemDetailPage")}
-      >
-        ItemDetailPage <ChevronRightIcon />
-      </Button>
+      <MealCard items={menuItems} />
     </>
   );
 }
