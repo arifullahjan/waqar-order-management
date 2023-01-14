@@ -1,8 +1,7 @@
 import React from "react";
 import menu from "../data/data";
 import { Grid, Paper } from "@mui/material";
-import AddBoxIcon from "@mui/icons-material/AddBox";
-
+import AddBoxRoundedIcon from "@mui/icons-material/AddBoxRounded";
 const MealCard = () => {
   return (
     <>
@@ -11,7 +10,6 @@ const MealCard = () => {
         return (
           <article key={id}>
             <Paper
-              elevation={6}
               sx={{
                 width: "60%",
                 margin: "auto",
@@ -21,13 +19,19 @@ const MealCard = () => {
                 <Grid item xs={10} p={2}>
                   <h4>{name}</h4>
                   <p>{desc}</p>
-                  <h4>Rs.{price}</h4>
+                  <h4>
+                    {price.toLocaleString("en-PK", {
+                      style: "currency",
+                      currency: "PKR",
+                      minimumFractionDigits: 0,
+                    })}
+                  </h4>
                 </Grid>
                 <Grid item xs={2} p={2}>
                   <div>
                     <img src={img} />
                     <span className="btn">
-                      <AddBoxIcon />
+                      <AddBoxRoundedIcon />
                     </span>
                   </div>
                 </Grid>
