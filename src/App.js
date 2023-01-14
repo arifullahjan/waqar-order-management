@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import Menu from "./pages/Menu";
 import ItemDetailPage from "./pages/ItemDetailPage";
 function App() {
-  const [menuItems, setMenuItems] = useState(items);
   return (
     <>
       <Routes>
