@@ -1,7 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import MealCard from "../components/MealCard";
+import Categories from "../components/Categories";
+import items from "../data/data";
 
 const Menu = () => {
+  const [menuItems, setMenuItems] = useState(items);
+
+  const filterItems = (category) => {
+    if (category === "all") {
+      setMenuItems(items);
+      return;
+    }
+    const newItems = items.filter((item) => item.category === category);
+    setMenuItems(newItems);
+  };
+
   return (
     <>
       <section className="menu section">
@@ -10,7 +23,8 @@ const Menu = () => {
           <div className="underline"></div>
         </div>
       </section>
-      <MealCard />
+      <Categories filterItems={filterItems} />
+      <MealCard items={menuItems} />
     </>
   );
 };

@@ -1,22 +1,22 @@
 import React from "react";
-import menu from "../data/data";
 import { Grid, Paper } from "@mui/material";
-import AddBoxRoundedIcon from "@mui/icons-material/AddBoxRounded";
-const MealCard = () => {
+const MealCard = ({ items }) => {
   return (
     <>
-      {menu.map((menuItem) => {
+      {items.map((menuItem) => {
         const { id, name, img, desc, price } = menuItem;
         return (
           <article key={id}>
             <Paper
               sx={{
-                width: "60%",
+                width: "70%",
                 margin: "auto",
+                borderRadius: "15px",
+                marginBottom: "20px",
               }}
             >
               <Grid container>
-                <Grid item xs={10} p={2}>
+                <Grid item xs={9} p={2}>
                   <h4>{name}</h4>
                   <p>{desc}</p>
                   <h4>
@@ -27,13 +27,8 @@ const MealCard = () => {
                     })}
                   </h4>
                 </Grid>
-                <Grid item xs={2} p={2}>
-                  <div>
-                    <img src={img} />
-                    <span className="btn">
-                      <AddBoxRoundedIcon />
-                    </span>
-                  </div>
+                <Grid item xs={3} p={2}>
+                  <img src={img} />
                 </Grid>
               </Grid>
             </Paper>
