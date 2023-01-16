@@ -1,41 +1,35 @@
 import React from "react";
 import { Grid, Paper } from "@mui/material";
-const MealCard = ({ items }) => {
+const MealCard = ({ menuItem }) => {
+  const { id, name, img, desc, price } = menuItem;
   return (
-    <>
-      {items.map((menuItem) => {
-        const { id, name, img, desc, price } = menuItem;
-        return (
-          <article key={id}>
-            <Paper
-              sx={{
-                width: "70%",
-                margin: "auto",
-                borderRadius: "15px",
-                marginBottom: "20px",
-              }}
-            >
-              <Grid container>
-                <Grid item xs={9} p={2}>
-                  <h4>{name}</h4>
-                  <p>{desc}</p>
-                  <h4>
-                    {price.toLocaleString("en-PK", {
-                      style: "currency",
-                      currency: "PKR",
-                      minimumFractionDigits: 0,
-                    })}
-                  </h4>
-                </Grid>
-                <Grid item xs={3} p={2}>
-                  <img src={img} />
-                </Grid>
-              </Grid>
-            </Paper>
-          </article>
-        );
-      })}
-    </>
+    <article key={id}>
+      <Paper
+        sx={{
+          width: "70%",
+          margin: "auto",
+          borderRadius: "15px",
+          marginBottom: "20px",
+        }}
+      >
+        <Grid container>
+          <Grid item xs={9} p={2}>
+            <h4>{name}</h4>
+            <p>{desc}</p>
+            <h4>
+              {price.toLocaleString("en-PK", {
+                style: "currency",
+                currency: "PKR",
+                minimumFractionDigits: 0,
+              })}
+            </h4>
+          </Grid>
+          <Grid item xs={3} p={2}>
+            <img src={img} />
+          </Grid>
+        </Grid>
+      </Paper>
+    </article>
   );
 };
 

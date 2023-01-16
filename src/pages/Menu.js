@@ -24,7 +24,9 @@ const Menu = () => {
         </div>
       </section>
       <Categories filterItems={filterItems} />
-      <MealCard items={menuItems} />
+      {menuItems.map((menuItem) => {
+        return <MealCard menuItem={menuItem} />;
+      })}
     </>
   );
 };
