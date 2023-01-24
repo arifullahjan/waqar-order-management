@@ -1,9 +1,9 @@
 import React from "react";
 import { Grid, Paper } from "@mui/material";
-const MealCard = ({ menuItem }) => {
-  const { id, name, img, desc, price } = menuItem;
+const MealCard = (props) => {
+  const { name, img, desc, price } = props;
   return (
-    <article key={id}>
+    <article>
       <Paper
         sx={{
           width: "70%",

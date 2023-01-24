@@ -1,27 +1,34 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import MealCard from "../components/MealCard";
 import Categories from "../components/Categories";
-import items from "../data/data";
-import CircularProgress from "@mui/material/CircularProgress";
-import Box from "@mui/material/Box";
 
+//////////////////////////////////////////
+
+import { app } from "../firebase";
+
+import { getFirestore, collection, getDocs } from "firebase/firestore";
+
+const firestore = getFirestore(app);
+
+///////////////////////////////////////////////
 const Menu = () => {
-  const [menuItems, setMenuItems] = useState(items);
-  const [loading, setLoading] = useState(false);
-  useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  }, [menuItems]);
+  const [items, setItems] = useState([]);
+
   const filterItems = (category) => {
     if (category === "all") {
-      setMenuItems(items);
+      setItems(items);
       return;
     }
     const newItems = items.filter((item) => item.category === category);
-    setMenuItems(newItems);
+    setItems(newItems);
   };
+
+  const listAllItems = () => {
+    return getDocs(collection(firestore, "items"));
+  };
+  useEffect(() => {
+    listAllItems().then((items) => setItems(items.docs));
+  }, []);
 
   return (
     <section className="menu section">
@@ -30,26 +37,9 @@ const Menu = () => {
         <div className="underline"></div>
       </div>
       <Categories filterItems={filterItems} />;
-      {loading ? (
-        <Box
-          sx={{
-            top: 0,
-            left: 0,
-            bottom: 0,
-            right: 0,
-            position: "absolute",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <CircularProgress size={150} color="secondary" />
-        </Box>
-      ) : (
-        menuItems.map((menuItem) => {
-          return <MealCard menuItem={menuItem} />;
-        })
-      )}
+      {items.map((item) => {
+        return <MealCard key={item.id} {...item.data()} />;
+      })}
     </section>
   );
 };
