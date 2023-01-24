@@ -27,7 +27,7 @@ const Menu = () => {
     return getDocs(collection(firestore, "items"));
   };
   useEffect(() => {
-    listAllItems().then((items) => setItems(items.docs));
+    listAllItems().then((items) => setItems(items.docs.map(doc=>doc.data())));
   }, []);
 
   return (
@@ -38,7 +38,7 @@ const Menu = () => {
       </div>
       <Categories filterItems={filterItems} />;
       {items.map((item) => {
-        return <MealCard key={item.id} {...item.data()} />;
+        return <MealCard key={item.id} {...item} />;
       })}
     </section>
   );
